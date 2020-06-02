@@ -27,6 +27,8 @@ public class WordReader {
             String word;
             List<String> wordlist = new ArrayList<String>();
 
+            // It's hardcoded for just a comma regex
+
             while((word = reader.readLine()) != null){
                 String[] words = word.split(",");
 

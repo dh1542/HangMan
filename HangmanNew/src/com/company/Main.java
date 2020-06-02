@@ -15,6 +15,11 @@ public class Main {
 
 
 
+
+
+
+        // Reading in CSV data for words.
+
         File wordList = new File("C:/Users/Dominik Hoffmann/" +
                 "IdeaProjects/HangmanNew/src/WordList/most-common-nouns-english.csv");
 
@@ -34,39 +39,49 @@ public class Main {
 
 
 
+
+
             while(count != chances){
                 Scanner reader = new Scanner(System.in);
                 System.out.println("Your guess (first character will count): ");
                 char c = reader.next().charAt(0);
 
+                // Casting down c if it's uppercase
+
+                if(Character.isUpperCase(c)){
+                    c = Character.toLowerCase(c);
+                }
 
 
 
+
+
+
+                // Checking if given char is alphabetic and wasn't already used if so it will get
+                // on a banned list
                 if(Character.isAlphabetic(c) && !banned.contains(c)){
+
+                    // checking if the char occurs in the word
                     if(word.indexOf(c) == -1){
                         banned.add(c);
-
                         count++;
                     }
 
 
                     else{
-                        List<Integer> temp = new ArrayList<Integer>();
+                        // Iterating over word and adding chars in order at the right position in array
                         for(int i = 0; i < word.length(); i++){
                             if(word.charAt(i) == c){
                                 guess[i] = c;
                                 charCounter++;
                             }
                         }
-
-
-
-
                     }
 
                     for(int j = 0; j < guess.length; j++){
                         System.out.println(j + ": " + guess[j]);
                     }
+                    // Eliminating chars of array display --- ?! More elegant solution !?
                     String guessS = Arrays.toString(guess);
                     if(guessS.contains(",") || guessS.contains("]") || guessS.contains("[")){
                         guessS = guessS.replace(",", "");
@@ -90,25 +105,6 @@ public class Main {
 
 
                 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             }
 
             if(chances == count){
